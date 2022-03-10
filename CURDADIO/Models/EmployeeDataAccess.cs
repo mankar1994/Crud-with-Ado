@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data;
+using System.Data;
 
 namespace CURDADIO.Models
 {
@@ -19,8 +20,9 @@ namespace CURDADIO.Models
             string Sp = "SP_EMPLOYEE";
 
             SqlCommand sql = new SqlCommand(Sp, Dbconnection.Connection);
+            sql.CommandType = CommandType.StoredProcedure;
            sql.Parameters.AddWithValue("@action", "SELECT_JOIN");
-            if(Dbconnection.Connection.State==System.Data.ConnectionState.Closed)
+            if(Dbconnection.Connection.State==ConnectionState.Closed)
             {
                 Dbconnection.Connection.Open();
             }
